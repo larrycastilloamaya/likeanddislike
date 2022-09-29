@@ -1,24 +1,61 @@
-import logo from './logo.svg';
-import './App.css';
+import React, {useState} from 'react';
 
 function App() {
+  const [like, setlike] = useState(100)
+  const [dislike, setdislike] = useState(25)
+
+  const [likeactive, setlikeactive] = useState(false)
+
+  const [dislikeactive, setdislikeactive] = useState(false)
+
+  function likef(){
+    if(likeactive) {
+        setlikeactive(false)
+        setlike(like-1)
+    }else{
+      setlikeactive(true)
+      setlike(like+1)
+      if (dislikeactive) {
+
+        setdislikeactive(false)
+        setlike(like+1)
+        setdislike(dislike-1)
+      }
+
+    }
+
+  }
+
+  function dislikef(){
+    if(dislikeactive) {
+        setdislikeactive(false)
+        setdislike(dislike-1)
+    }else{
+      setdislikeactive(true)
+      setdislike(dislike+1)
+      if (likeactive) {
+
+        setlikeactive(false)
+        setdislike(dislike+1)
+        setlike(like-1)
+      }
+
+    }
+
+  }
+
+  
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+  
+     <div>
+
+      <button onClick={likef} > Like {like}</button>
+      <button onClick={dislikef} > Dislike {dislike}</button>
+     </div>
     </div>
+
   );
 }
 
